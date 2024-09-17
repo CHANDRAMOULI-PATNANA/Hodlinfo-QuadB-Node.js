@@ -1,36 +1,174 @@
+/* public/styles.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #ffffff;
     margin: 0;
     padding: 0;
+    background-color: #1e1e1e;
+    color: #fff;
 }
 
-h1 {
+body.light-theme {
+    background-color: #fff;
+    color: #000;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #2e2e2e;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 10px;
+}
+
+.nav-button {
+    background-color: #3c3c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.nav-button.selected {
+    background-color: green;
+}
+
+.nav-button:hover {
+    background-color: #4a4a4a;
+}
+
+.telegram-link {
+    background-color: green;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.telegram-link:hover {
+    background-color: #4a4a4a;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: green;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+.additional-info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.additional-info .percentage {
+    color: green;
+    font-weight: bold;
+}
+
+.highlight {
+    color: green;
     text-align: center;
-    margin-top: 20px;
+    font-size: 24px;
 }
 
 table {
     width: 80%;
-    margin: 20px auto;
+    margin: 0 auto;
     border-collapse: collapse;
+    background-color: #2e2e2e;
 }
 
 th, td {
-    border: 1px solid #ffffff;
     padding: 10px;
-    text-align: center;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-thead {
-    background-color: #333333;
+tr:hover {
+    background-color: #3c3c3c;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #222222;
+th {
+    background-color: #4a4a4a;
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #1a1a1a;
+    background-color: #2e2e2e;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #3c3c3c;
+}
+
+body.light-theme th {
+    background-color: #ddd;
+}
+
+body.light-theme tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+body.light-theme tr:nth-child(even) {
+    background-color: #eee;
+}
+
+.savings {
+    color: green;
+}
+
+.savings.negative {
+    color: red;
 }

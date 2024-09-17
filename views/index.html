@@ -1,0 +1,52 @@
+<!-- views/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HodlInfo Clone</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="dark-theme">
+    <header>
+        <h1 class="logo">HodlInfo</h1>
+        <div class="top-bar">
+            <button class="nav-button selected">INR</button>
+            <button class="nav-button">BTC</button>
+            <button class="nav-button" id="buy-button">BUY</button>
+            <div id="timer">01:00</div>
+            <a href="https://t.me/hodlinfo" target="_blank" class="telegram-link">Connect Telegram</a>
+            <label class="switch">
+                <input type="checkbox" id="theme-switch">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </header>
+    <div class="additional-info">
+        <span class="percentage">0.1% 5 Mins</span>
+        <span class="percentage">0.96% 1 Hour</span>
+        <span class="percentage">2.73% 1 Day</span>
+        <span class="percentage">7.51% 7 Days</span>
+    </div>
+    <main>
+        <h2 class="highlight">Best Price to Trade</h2>
+        <p>Average BTC/INR net price including commission</p>
+        <table id="crypto-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Platform</th>
+                    <th>Last Traded Price</th>
+                    <th>Buy/Sell Price</th>
+                    <th>Difference</th>
+                    <th>Savings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be injected here -->
+            </tbody>
+        </table>
+    </main>
+    <script src="/app.js"></script>
+</body>
+</html>

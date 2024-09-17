@@ -1,52 +1,33 @@
-// const express = require('express');
-// const path = require('path');
-// const sqlite3 = require('sqlite3').verbose();
-// const app = express();
-// const port = 3000;
-
-// // Set Pug as the templating engine
-// app.set('view engine', 'pug');
-// app.set('views', path.join(__dirname, 'views'));
-
-// // Serve static files from the "public" directory
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// // Use the routes defined in routes/api.js
-// const apiRoutes = require('./routes/api');
-// app.use('/api', apiRoutes);
-
-// // Route to serve the main page
-// app.get('/', (req, res) => {
-//     res.render('index'); // Renders views/index.pug
-// });
-
-// // Start the server
-// app.listen(port, () => {
-//     console.log(`Server running at http://localhost:${port}`);
-// });
-
+// server.js
 const express = require('express');
-const path = require('path');
+const db = require('./database');
 const app = express();
-const port = 3000;
 
-// Set Pug as the templating engine
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.use(express.static('public'));
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Use the routes defined in routes/api.js
-const apiRoutes = require('./routes/api');
-app.use('/api', apiRoutes);
-
-// Route to serve the main page
 app.get('/', (req, res) => {
-    res.render('index'); // Renders views/index.pug
+    res.sendFile(__dirname + '/views/index.html');
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.get('/api/getTop10', (req, res) => {
+    db.all(`SELECT * FROM cryptocurrencies LIMIT 4`, (err, rows) => {
+        if (err) {
+            res.status(500).send(err.message);
+        } else {
+            const formattedRows = rows.map(row => ({
+                name: row.name,
+                last: row.last.toLocaleString(),
+                buy: row.buy.toLocaleString(),
+                sell: row.sell.toLocaleString(),
+                difference: ((row.buy - row.sell) / row.sell * 100).toFixed(2) + '%',
+                savings: ((row.last - row.buy) / row.buy * 100).toFixed(2) + '%'
+            }));
+            res.json(formattedRows);
+        }
+    });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
